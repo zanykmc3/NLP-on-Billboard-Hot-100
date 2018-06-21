@@ -12,5 +12,5 @@ How has music changed? Natural Language Processing on Lyrics from The Billboard 
 <p>get_lyrics.py takes in billboard_data.csv and uses lyricwikia which is a Python API to access song lyrics (https://github.com/enricobacis/lyricwikia)</p>
 <p>get_lyrics.py creates pandas dataframe of all Billboard Hot 100 records from 1958 to 2018 with the entire song's lyrics.
   <br/>includes columns: title, artist, rank, peakPos, lastPos, weeks, date, lyrics</p>
-<p><h4>inputs:</h4> billboard_data.csv which is csv version of dataframe</p>
+<p><b>inputs:</b> billboard_data.csv which is csv version of dataframe</p>
 <p>outputs: lyric_match.csv which is csv version of dataframe with lyrics</p>
