@@ -15,4 +15,4 @@ How has music changed? Natural Language Processing on Lyrics from The Billboard 
 <p><b>inputs:</b> billboard_dataset.csv which is csv version of dataframe</p>
 <p><b>outputs:</b> lyric_dataset.csv which is csv version of dataframe with lyrics</p>
 <br/>
-<p>Datasets can be downloaded<a href="https://www.google.com">here.</a></p>
+<p>Datasets can be downloaded<a href="https://www.google.com" target="_blank"> here.</a></p>
