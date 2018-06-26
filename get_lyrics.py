@@ -1,50 +1,51 @@
 import requests
 import pandas as pd
 import lyricwikia as lw
+from itertools import islice
 
-##def request_song_info(song_title, artist_name):
-##    base_url = 'https://api.genius.com'
-##    headers = {'Authorization': 'Bearer ' + 'INSERT YOUR TOKEN HERE'}
-##    search_url = base_url + '/search'
-##    data = {'q': song_title + ' ' + artist_name}
-##    response = requests.get(search_url, data=data, headers=headers)
-##
-##    return response
-
-df = pd.read_csv('billboard_data.csv')
-df['lyrics'] = ""
-yes = 0
-no = 0
+# read in dataframe and add empty lyric column
+df_billboard = pd.read_csv('billboard_data.csv')
+df_billboard['lyrics'] = ""
 first_artist_str = ""
-df_subset = df
 
-for index, row in df_subset.iterrows():
+
+# iterate through dataframe
+# for batch processing: for index, row in islice(df_subset.iterrows(),240000,270000,1):
+for index, row in df_billboard.iterrows():    
+
+    # save csv every 10000 records
     if index % 10000 == 0:
-        df_subset.to_csv("lyric_match")
+        df_billboard.to_csv("lyric_dataset.csv")
         print("saved")
-
+        
+    # try to search for song lyrics, if no match: try again
     try:
         lyrics = lw.get_lyrics(row['artist'],row['title'])
-        df_subset.ix[index,'lyrics'] = lyrics
-        yes = yes + 1
-
-    except:
-  
+        df_billboard.ix[index,'lyrics'] = lyrics
+        print("match")
+        
+    # no match, but look for first artist listed
+    except:      
+        # find primary artist name
         spl = row['artist'].split()
         for i in range(len(spl)):
             if spl[i]=="Featuring":
                 first_artist = spl[0:i]
+            else:
+                first_artist = spl
         for j in range(len(first_artist)):
             first_artist_str = first_artist_str + " " + first_artist[j]
 
+        # try again
         try:
-            lyrics = lw.get_lyrics(first_artist_str,row['title'])
-     
-            df_subset.ix[index,'lyrics'] = lyrics
-            yes = yes + 1
+            lyrics = lw.get_lyrics(first_artist_str,row['title']) 
+            df_billboard.ix[index,'lyrics'] = lyrics
+            print("match")
+            
+        # no match
         except:
-            no = no + 1
-
+            print("no match")
+            
         first_artist_str = ""
-    
-df_subset.to_csv("lyric_match")
+
+df_billboard.to_csv("lyric_dataset.csv")
