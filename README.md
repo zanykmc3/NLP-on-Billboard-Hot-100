@@ -14,5 +14,5 @@ How has music changed? Natural Language Processing on Lyrics from The Billboard 
   <br/>includes columns: title, artist, rank, peakPos, lastPos, weeks, date, lyrics</p>
 <p><b>inputs:</b> billboard_dataset.csv which is csv version of dataframe</p>
 <p><b>outputs:</b> lyric_dataset.csv which is csv version of dataframe with lyrics</p>
-
-<a href="www.google.com">Datasets can be downloaded here.</a>
+<br/>
+<p>Datasets can be downloaded<a href="https://www.google.com">here.</a></p>
